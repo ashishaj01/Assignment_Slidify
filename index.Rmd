@@ -1,0 +1,83 @@
+---
+title       : Develping Data Product Assignment-Slidify
+subtitle    : Modeling Diabetes Dataset
+author      : Ashish Jain
+job         : Logistic Regression Model
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : zenburn       # 
+widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+---
+```{r,echo=FALSE,results='hide'}
+  library(faraway)
+  library(ROCR)
+  data(pima)
+
+```
+
+## Data information
+1. Data Source: Pima dataset in "faraway" package in R 
+2. Data variables and its attributes:
+```{r,echo=FALSE}
+  str(pima)
+``` 
+
+--- 
+## Data Exploration
+```{r,echo=FALSE}
+   summary(pima)
+```
+
+---
+## Model development
+
+1.Notice variables glucose,triceps,insulin, bmi etc cannot have zero values.
+  Replace Zero by NA.
+
+```{r,echo=FALSE,results='hide'}
+   pima$glucose[pima$glucose==0]<-NA
+   pima$diastolic[pima$diastolic==0]<-NA
+   pima$triceps[pima$triceps==0]<-NA
+   pima$insulin[pima$insulin==0]<-NA
+   pima$bmi[pima$bmi==0]<-NA
+   
+
+```
+2. Replace Observation with Missing values.
+
+```{r,echo=FALSE,results='hide'}
+   pima$test <-as.factor(pima$test)
+   pima1<-pima[complete.cases(pima),]
+   head(pima1) 
+```
+
+3. Use Logistic regression to model binary variable test
+
+```{r,echo=FALSE}
+   logitmod1 <- glm(test~., data=pima1,family=binomial) 
+   summary(logitmod1)
+```
+
+---
+## ROC Curve
+```{r,echo=FALSE,results='hide'}
+library(ROCR)
+# select training set (as example, here only use 1/4 of the data to build the    model)
+train <- sample(x=1:nrow(pima1), size=nrow(pima)/4)
+# calculate predicted probabilities on the training set
+scores <- predict(logitmod1, newdata=pima1[train,], type="response")
+# compare predicted probabilities to labels, for varying probability cutoffs
+pred <- prediction(scores, labels=pima1[train,]$test )
+perf <- performance(pred, "tpr", "fpr")
+
+```
+ROC Area
+```{r,echo=FALSE}
+    # print out the area under the curve
+   unlist(attributes(performance(pred, "auc"))$y.values)
+   
+    # plot the ROC curve
+    plot(perf, colorize=F, main="In-sample ROC curve")
+   
+```
