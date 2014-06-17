@@ -10,6 +10,7 @@ widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
 
+
 ```
 ## 
 ## Attaching package: 'faraway'
@@ -142,7 +143,7 @@ mode        : selfcontained # {standalone, draft}
 ROC Area
 
 ```
-## [1] 0.8442
+## [1] 0.8617
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 

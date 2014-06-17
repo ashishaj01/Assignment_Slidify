@@ -9,6 +9,7 @@ hitheme     : zenburn       #
 widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
+
 ```{r,echo=FALSE,results='hide'}
   library(faraway)
   library(ROCR)
