@@ -9,7 +9,7 @@ hitheme     : zenburn       #
 widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
-
+# Loading Pima dataset
 
 ```
 ## 
@@ -47,7 +47,7 @@ mode        : selfcontained # {standalone, draft}
 ##     lowess
 ```
 
-## Data information
+# Data information
 1. Data Source: Pima dataset in "faraway" package in R 
 2. Data variables and its attributes:
 
@@ -65,7 +65,7 @@ mode        : selfcontained # {standalone, draft}
 ```
 
 --- 
-## Data Exploration
+# Data Exploration
 
 ```
 ##     pregnant        glucose      diastolic        triceps    
@@ -92,7 +92,7 @@ mode        : selfcontained # {standalone, draft}
 ```
 
 ---
-## Model development
+# Model development
 
 1.Notice variables glucose,triceps,insulin, bmi etc cannot have zero values.
   Replace Zero by NA.
@@ -138,12 +138,12 @@ mode        : selfcontained # {standalone, draft}
 ```
 
 ---
-## ROC Curve
+# ROC Curve
 
 ROC Area
 
 ```
-## [1] 0.8617
+## [1] 0.8448
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
